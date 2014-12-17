@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.dmcs.docscanner.MainFragment"
+    android:background="@drawable/bg" >
+
+    <ImageButton
+        android:id="@+id/photoButton"
+        android:layout_width="51dp"
+        android:layout_height="45dp"
+        android:src="@drawable/photo"
+        android:contentDescription="@string/photo_button"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="70dp" />
+
+    <TextView
+        android:id="@+id/photoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="@string/photo_button_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <ImageButton
+        android:id="@+id/fileButton"
+        android:layout_width="51dp"
+        android:layout_height="40dp"
+        android:src="@drawable/folder"
+        android:contentDescription="@string/file_button"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:id="@+id/fileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="@string/file_button_text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginTop="110dp" />
+
+</FrameLayout>
+

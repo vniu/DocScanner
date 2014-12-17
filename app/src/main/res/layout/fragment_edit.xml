@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/light_gray"
+    tools:context="pl.dmcs.docscanner.EditFragment">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/step1"
+        android:layout_gravity="left|top"
+        android:background="@drawable/step2small"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/editTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/title_edit"
+        android:textSize="25sp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="15dp">
+    </TextView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/text"
+        android:background="@color/white"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="20dp"
+        android:gravity="top"
+        >
+    </EditText>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/okButtonEdit"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="10dp"
+        android:background="@drawable/ok"/>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:background="@android:color/transparent"
+        android:layout_width="61dp"
+        android:layout_height="70dp"
+        android:src="@drawable/back"
+        android:contentDescription="@string/back"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="10dp"/>
+
+</FrameLayout>

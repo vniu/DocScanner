@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DocScanner</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="photo_button">photoButton</string>
+    <string name="photo_button_text">Shoot a photo</string>
+    <string name="file_button">fileButton</string>
+    <string name="file_button_text">Pick a picture</string>
+    <string name="title_activity_photo_select">PhotoSelectActivity</string>
+    <string name="title_edit">Edit/fix read text</string>
+    <string name="photo_select_field">Photo select field</string>
+    <string name="title_activity_send">SendActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="send_title">Send or save</string>
+    <string name="title_activity_save">SaveActivity</string>
+    <string name="save_as_pdf">Save as pdf</string>
+    <string name="back">Back</string>
+    <string name="title_activity_edit">EditActivity</string>
+
+    <string-array name="lang_array">
+        <item>English</item>
+        <item>Polski</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

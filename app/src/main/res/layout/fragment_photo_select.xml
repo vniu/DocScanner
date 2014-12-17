@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/photo_select_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.dmcs.docscanner.PhotoSelectFragment"
+    tools:ignore="MergeRootFrame" >
+
+    <com.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/CropImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        custom:imageResource="@drawable/butterfly" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/step1"
+        android:layout_gravity="left|top"
+        android:background="@drawable/step1small"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/okButton"
+        android:layout_gravity="right|top"
+        android:background="@drawable/ok"/>
+
+    <!--<ImageView-->
+    <!--android:id="@+id/testImage"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+</FrameLayout>

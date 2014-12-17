@@ -1,0 +1,7 @@
+.gradle
+.idea
+cropper/
+libraries/
+app/build/intermediates/
+build/
+local.properties

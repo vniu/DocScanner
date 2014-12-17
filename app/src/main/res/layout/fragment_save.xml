@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.dmcs.docscanner.SaveFragment"
+    android:background="@drawable/bg_save">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/step1"
+        android:layout_gravity="left|top"
+        android:background="@drawable/step3small"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/saveAsPdfButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="@string/save_as_pdf"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="40dp"
+        android:width="150dp"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:id="@+id/pdfIcon"
+        android:background="@android:color/transparent"
+        android:layout_width="61dp"
+        android:layout_height="70dp"
+        android:src="@drawable/pdf"
+        android:contentDescription="@string/photo_button"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="31dp"
+        android:layout_marginLeft="70dp"/>
+
+    <TextView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="@string/back"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:background="@color/blue"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:width="150dp"
+        android:gravity="center" />
+
+    <ImageButton
+        android:id="@+id/backIcon"
+        android:background="@android:color/transparent"
+        android:layout_width="61dp"
+        android:layout_height="70dp"
+        android:src="@drawable/back"
+        android:contentDescription="@string/photo_button"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="70dp"/>
+
+</FrameLayout>

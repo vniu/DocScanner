@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.dmcs.docscanner.SendActivity"
+    tools:ignore="MergeRootFrame"
+    android:background="@drawable/bg_send" >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:text="@string/send_title"
+        android:id="@+id/title"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"/>
+
+    <ImageButton
+        android:layout_width="67dp"
+        android:layout_height="78dp"
+        android:id="@+id/hangouts"
+        android:layout_gravity="center"
+        android:background="@drawable/hangouts"
+        android:layout_marginRight="50dp"/>
+
+</FrameLayout>
