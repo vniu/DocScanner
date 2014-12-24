@@ -20,6 +20,7 @@
     <string name="back">Back</string>
     <string name="title_activity_edit">EditActivity</string>
 
+    <string name="choose_lang">Choose a language</string>
     <string-array name="lang_array">
         <item>English</item>
         <item>Polski</item>

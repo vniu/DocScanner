@@ -15,12 +15,12 @@ import android.widget.TextView;
  */
 public class SaveFragment extends Fragment {
 
-    private ImageButton backButton;
+    private TextView backButton;
     private ImageButton backIcon;
+    private TextView saveAsPdfButton;
+    private ImageButton saveAsPdfIcon;
 
-    public SaveFragment() {
-        // Required empty public constructor
-    }
+    public SaveFragment() {}
 
 
     @Override
@@ -28,8 +28,10 @@ public class SaveFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_save, container, false);
 
-        backButton = (ImageButton) view.findViewById(R.id.backButton);
-        backIcon = (ImageButton) view.findViewById(R.id.backIcon);
+        backButton = (TextView) view.findViewById(R.id.backToEditButton);
+        backIcon = (ImageButton) view.findViewById(R.id.backToEditIcon);
+        saveAsPdfButton = (TextView) view.findViewById(R.id.saveAsPdfButton);
+        saveAsPdfIcon = (ImageButton) view.findViewById(R.id.saveAsPdfIcon);
 
         View.OnClickListener back = new View.OnClickListener() {
             @Override
@@ -37,9 +39,19 @@ public class SaveFragment extends Fragment {
                 getActivity().getFragmentManager().popBackStack();
             }
         };
+        View.OnClickListener saveAsPdf = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendFragment sendFragment = new SendFragment();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, sendFragment).addToBackStack(null).commit();
+            }
+        };
 
         backButton.setOnClickListener(back);
         backIcon.setOnClickListener(back);
+        saveAsPdfButton.setOnClickListener(saveAsPdf);
+        saveAsPdfIcon.setOnClickListener(saveAsPdf);
+
 
         return view;
     }

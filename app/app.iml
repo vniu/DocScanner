@@ -83,10 +83,10 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="support-annotations-21.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.2" level="project" />
-    <orderEntry type="module" module-name="tess-two" exported="" />
+    <orderEntry type="library" exported="" name="support-annotations-21.0.2" level="project" />
     <orderEntry type="module" module-name="cropper" exported="" />
+    <orderEntry type="module" module-name="tess-two" exported="" />
   </component>
 </module>
 

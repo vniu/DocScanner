@@ -36,11 +36,6 @@
             android:label="@string/title_activity_photo_select"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
         </activity>
-        <activity
-            android:name="pl.dmcs.docscanner.SendActivity"
-            android:label="@string/title_activity_send"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
-        </activity>
     </application>
 
 </manifest>

@@ -5,3 +5,4 @@ libraries/
 app/build/intermediates/
 build/
 local.properties
+.DS_Store

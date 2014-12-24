@@ -1,10 +1,14 @@
 package pl.dmcs.docscanner;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,11 +28,11 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.IOException;
 
+import pl.dmcs.docscanner.helpers.LanguageDialog;
 
-public class PhotoSelectFragment extends Fragment {
 
-    private static final String DATA_PATH = Environment.getExternalStorageDirectory().getPath()+"/tesseract";
-    private static final String TAG = "PhotoSelectActivity";
+public class PhotoSelectFragment extends DialogFragment {
+
     public static final String PASS_PATH = "path";
     public static final String PASS_URI = "uri";
 
@@ -37,7 +41,7 @@ public class PhotoSelectFragment extends Fragment {
     private ImageButton okButton;
     private Bitmap croppedImage;
 
-    private ProgressDialog progressDialog;
+    public OnCroppedImageSetListener mListener;
 
     public PhotoSelectFragment() {}
 
@@ -45,6 +49,16 @@ public class PhotoSelectFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = this.getActivity();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnCroppedImageSetListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnCroppedImageSetListener");
+        }
     }
 
     @Override
@@ -79,48 +93,17 @@ public class PhotoSelectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 croppedImage = cropImageView.getCroppedImage();
-                new TesseractTask().execute(croppedImage);
+                mListener.onCroppedImageSetListener(croppedImage);
+                LanguageDialog languageDialog = new LanguageDialog();
+                languageDialog.show(getFragmentManager(), "lang");
             }
         });
 
         return view;
     }
 
-    private String testTesseract(Bitmap bitmap) {
-        TessBaseAPI baseApi = new TessBaseAPI();
-        baseApi.init(DATA_PATH, "eng");
-        baseApi.setImage(bitmap);
-        String recognizedText = baseApi.getUTF8Text();
-        baseApi.end();
-        Log.v(TAG, recognizedText);
-        return recognizedText;
+    public interface OnCroppedImageSetListener {
+        public void onCroppedImageSetListener(Bitmap image);
     }
 
-    private class TesseractTask extends AsyncTask<Bitmap, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(context, "", "Przetwarzanie", false);
-        }
-
-        @Override
-        protected String doInBackground(Bitmap... params) {
-            String result = null;
-            for (int i = 0; i < params.length; i++) {
-                result = testTesseract(params[i]);
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String resultText) {
-            progressDialog.dismiss();
-
-            EditFragment editFragment = new EditFragment();
-            Bundle args = new Bundle();
-            args.putString("text", resultText);
-            editFragment.setArguments(args);
-            getActivity().getFragmentManager().beginTransaction().replace(R.id.container, editFragment).addToBackStack(null).commit();
-        }
-    }
 }

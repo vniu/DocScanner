@@ -31,7 +31,7 @@
         android:gravity="center"/>
 
     <ImageButton
-        android:id="@+id/pdfIcon"
+        android:id="@+id/saveAsPdfIcon"
         android:background="@android:color/transparent"
         android:layout_width="61dp"
         android:layout_height="70dp"
@@ -42,7 +42,7 @@
         android:layout_marginLeft="70dp"/>
 
     <TextView
-        android:id="@+id/backButton"
+        android:id="@+id/backToEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
@@ -58,7 +58,7 @@
         android:gravity="center" />
 
     <ImageButton
-        android:id="@+id/backIcon"
+        android:id="@+id/backToEditIcon"
         android:background="@android:color/transparent"
         android:layout_width="61dp"
         android:layout_height="70dp"

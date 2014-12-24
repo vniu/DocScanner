@@ -23,9 +23,7 @@ public class EditFragment extends Fragment {
 
     private Context context;
 
-    public EditFragment() {
-        // Required empty public constructor
-    }
+    public EditFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
