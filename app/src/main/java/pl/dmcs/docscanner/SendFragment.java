@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import org.apache.http.protocol.HTTP;
+
 import java.io.File;
 
 
@@ -49,36 +51,30 @@ public class SendFragment extends Fragment {
     }
 
     private void setListeners() {
-//        this.smsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Log.v(TAG, filePath);
-//                Intent sendIntent = new Intent(Intent.ACTION_SEND);
-//                sendIntent.setType("text/x-vcard");
-//                sendIntent.putExtra(Intent.EXTRA_STREAM, filePath);
-//                startActivity(sendIntent);
-//            }
-//        });
+        File file = new File(filePath);
+        final Uri uri = Uri.fromFile(file);
+
+        this.smsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("smsto:"));
+                intent.putExtra("sms_body", "Check out pdf created by awesome OCR Application - Docscanner!");
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(intent, "Send mms..."));
+            }
+        });
 
         this.mailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = new File(filePath);
-                Uri uri = Uri.fromFile(file);
-
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("application/pdf");
+                emailIntent.setType("message/rfc822");
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
                 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-//                Intent i = new Intent(Intent.ACTION_SENDTO);
-//                i.setType("application/pdf");
-//                i.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(emailIntent,"Email:"));
             }
         });
     }
-
-
 }
