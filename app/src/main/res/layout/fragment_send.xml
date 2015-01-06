@@ -21,11 +21,30 @@
         android:layout_marginTop="50dp"/>
 
     <ImageButton
-        android:layout_width="67dp"
-        android:layout_height="78dp"
-        android:id="@+id/hangouts"
+        android:id="@+id/smsshare"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
         android:layout_gravity="center"
-        android:background="@drawable/hangouts"
-        android:layout_marginRight="50dp"/>
+        android:background="@drawable/sms"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="50dp"/>
+
+    <ImageButton
+        android:id="@+id/fbshare"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/facebook"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="20dp"/>
+
+    <ImageButton
+        android:id="@+id/mailshare"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/mail"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="95dp"/>
 
 </FrameLayout>

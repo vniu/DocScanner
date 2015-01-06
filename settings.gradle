@@ -1,1 +1,1 @@
-include ':app', ':cropper', ':libraries:tess-two'
+include ':app', ':cropper', ':libraries:tess-two', ':pdfbox-android-1.8.6'

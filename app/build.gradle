@@ -22,4 +22,5 @@ dependencies {
     compile project(':cropper')
     compile project(':libraries:tess-two')
     compile 'com.android.support:support-v4:21.0.2'
+    compile project(':pdfbox-android-1.8.6')
 }

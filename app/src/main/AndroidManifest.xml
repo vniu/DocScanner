@@ -24,17 +24,13 @@
         <activity
             android:name="pl.dmcs.docscanner.MainActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="pl.dmcs.docscanner.PhotoSelectActivity"
-            android:label="@string/title_activity_photo_select"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
         </activity>
     </application>
 

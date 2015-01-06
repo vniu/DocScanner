@@ -13,20 +13,30 @@ import android.util.Log;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
-import pl.dmcs.docscanner.helpers.LanguageDialog;
+import java.io.File;
+import java.io.IOException;
 
-public class MainActivity extends Activity implements MainFragment.OnCurrentPhotoPathSetListener, PhotoSelectFragment.OnCroppedImageSetListener, LanguageDialog.LanguageSelectListener {
+import pl.dmcs.docscanner.helpers.FileNameDialog;
+import pl.dmcs.docscanner.helpers.LanguageDialog;
+import pl.dmcs.docscanner.helpers.PDFWriter;
+
+public class MainActivity extends Activity
+        implements MainFragment.OnCurrentPhotoPathSetListener,
+                   PhotoSelectFragment.OnCroppedImageSetListener,
+                   LanguageDialog.LanguageSelectListener,
+                   FileNameDialog.FilenameTypeListener {
 
 	private static final int CAMERA_REQUEST = 2048;
     private static final int FILE_REQUEST = 4096;
 
     private static final String DATA_PATH = Environment.getExternalStorageDirectory().getPath()+"/tesseract";
-    private String tesseractLanguage;
 
     private static final String TAG = "MainActivity";
 
 	public String mCurrentPhotoPath;
+    private String tesseractLanguage;
     public Bitmap croppedImage;
+    private String fileName;
 
     private ProgressDialog progressDialog;
     private Context context;
@@ -51,14 +61,14 @@ public class MainActivity extends Activity implements MainFragment.OnCurrentPhot
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
 
             args.putString(PhotoSelectFragment.PASS_PATH, mCurrentPhotoPath);
-            Log.v(TAG, mCurrentPhotoPath);
+//            Log.v(TAG, mCurrentPhotoPath);
 
         } else if (requestCode == FILE_REQUEST && resultCode == RESULT_OK) {
 
-            Log.v(TAG, "file request: " + FILE_REQUEST);
+//            Log.v(TAG, "file request: " + FILE_REQUEST);
             Uri selectedImageUri = data.getData();
             args.putString(PhotoSelectFragment.PASS_URI, selectedImageUri.toString());
-            Log.v(TAG, selectedImageUri.toString());
+//            Log.v(TAG, selectedImageUri.toString());
 
         }
 
@@ -81,6 +91,30 @@ public class MainActivity extends Activity implements MainFragment.OnCurrentPhot
     @Override
     public void onCroppedImageSetListener(Bitmap image) {
         this.croppedImage = image;
+    }
+
+    @Override
+    public void onFilenameType(String name, String text) {
+        Log.v(TAG, "onFilenameType");
+
+        this.fileName = name;
+
+        File file;
+        try {
+            file = PDFWriter.createFile(text, name + ".pdf");
+
+            SendFragment sendFragment = new SendFragment();
+            Bundle args = new Bundle();
+            Log.v(TAG, file.getAbsolutePath());
+            args.putString("filePath", file.toURI().toString());
+            sendFragment.setArguments(args);
+
+            getFragmentManager().beginTransaction().replace(R.id.container, sendFragment).addToBackStack(null).commit();
+        } catch (IOException e) {
+            Log.v(TAG, "Cannot write text to file");
+            e.printStackTrace();
+        }
+
     }
 
     private class TesseractTask extends AsyncTask<Bitmap, Void, String> {
@@ -120,6 +154,7 @@ public class MainActivity extends Activity implements MainFragment.OnCurrentPhot
             baseApi.setImage(bitmap);
             String recognizedText = baseApi.getUTF8Text();
             baseApi.end();
+            recognizedText.replace("-\n", "").replace("\n", "");
             Log.v(TAG, recognizedText);
             return recognizedText;
         }
