@@ -11,6 +11,6 @@ Android OCR application using Tesseract, to convert photos and image files to pd
 
 * application finish (full working ocr)
 * add sharing generated documents via sms, facebook, bluetooth etc.
-* add more languages support
+* add more languages support (already: polish, english)
 * add simple server to synchronize all files
 * future development (no idea what exactly)

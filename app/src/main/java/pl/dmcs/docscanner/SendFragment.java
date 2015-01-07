@@ -1,7 +1,10 @@
 package pl.dmcs.docscanner;
 
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import org.apache.http.protocol.HTTP;
 
 import java.io.File;
+import java.util.List;
 
 
 /**
@@ -25,9 +30,10 @@ public class SendFragment extends Fragment {
 
     private String filePath;
 
-    private ImageButton smsButton;
-    private ImageButton fbButton;
+    private ImageButton bluetoothButton;
+    private TextView bluetoothText;
     private ImageButton mailButton;
+    private TextView mailText;
 
     public SendFragment() {}
 
@@ -41,9 +47,10 @@ public class SendFragment extends Fragment {
         this.filePath = bundle.getString("filePath");
         Log.v(TAG, filePath);
 
-        this.smsButton = (ImageButton) view.findViewById(R.id.smsshare);
-        this.fbButton = (ImageButton) view.findViewById(R.id.fbshare);
-        this.mailButton = (ImageButton) view.findViewById(R.id.mailshare);
+        this.bluetoothButton = (ImageButton) view.findViewById(R.id.bluetoothshareIcon);
+        this.bluetoothText = (TextView) view.findViewById(R.id.bluetoothshareButton);
+        this.mailButton = (ImageButton) view.findViewById(R.id.mailshareIcon);
+        this.mailText = (TextView) view.findViewById(R.id.mailshareButton);
 
         this.setListeners();
 
@@ -54,18 +61,7 @@ public class SendFragment extends Fragment {
         File file = new File(filePath);
         final Uri uri = Uri.fromFile(file);
 
-        this.smsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("smsto:"));
-                intent.putExtra("sms_body", "Check out pdf created by awesome OCR Application - Docscanner!");
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(intent, "Send mms..."));
-            }
-        });
-
-        this.mailButton.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener mailListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -75,6 +71,49 @@ public class SendFragment extends Fragment {
                 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
-        });
+        };
+
+        View.OnClickListener bluetoothListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+                if (btAdapter != null) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_SEND);
+                    intent.setType("application/pdf");
+                    intent.putExtra(Intent.EXTRA_STREAM, uri );
+
+                    PackageManager packageManager = getActivity().getPackageManager();
+                    List<ResolveInfo> appsList = packageManager.queryIntentActivities(intent, 0);
+                    if(appsList.size() > 0) {
+                        String packageName = null;
+                        String className = null;
+                        boolean found = false;
+
+                        for(ResolveInfo info: appsList){
+                            packageName = info.activityInfo.packageName;
+                            if( packageName.equals("com.android.bluetooth")){
+                                className = info.activityInfo.name;
+                            }
+                        }
+                        intent.setClassName(packageName, className);
+                        startActivity(intent);
+                    }
+                }
+            }
+        };
+
+        View.OnClickListener restartListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainFragment mainFragment = new MainFragment();
+                getFragmentManager().beginTransaction().replace(R.id.container, mainFragment).addToBackStack(null).commit();
+            }
+        };
+
+        this.mailText.setOnClickListener(mailListener);
+        this.mailButton.setOnClickListener(mailListener);
+        this.bluetoothText.setOnClickListener(bluetoothListener);
+        this.bluetoothButton.setOnClickListener(bluetoothListener);
     }
 }

@@ -9,4 +9,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="blue">#0099CC</color>
 
+    <color name="mail_orange">#e66000</color>
+    <color name="fb_blue">#4c66a4</color>
+    <color name="bluetooth_blue">#0a3d91</color>
+
 </resources>
