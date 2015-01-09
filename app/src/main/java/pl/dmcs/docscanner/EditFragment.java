@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import pl.dmcs.docscanner.helpers.PDFWriter;
 
 
 /**
@@ -46,6 +49,7 @@ public class EditFragment extends Fragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                PDFWriter.createFile(editText);
                 SaveFragment saveFragment = new SaveFragment();
                 Bundle args = new Bundle();
                 args.putString("text", editText.getText().toString());

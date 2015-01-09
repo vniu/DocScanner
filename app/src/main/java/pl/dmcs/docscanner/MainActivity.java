@@ -131,9 +131,9 @@ public class MainActivity extends Activity
         @Override
         protected String doInBackground(Bitmap... params) {
             String result = null;
-            for (int i = 0; i < params.length; i++) {
-                result = testTesseract(params[i]);
-            }
+//            for (int i = 0; i < params.length; i++) {
+                result = processTesseract(params[0]);
+//            }
             return result;
         }
 
@@ -148,13 +148,13 @@ public class MainActivity extends Activity
             getFragmentManager().beginTransaction().replace(R.id.container, editFragment).addToBackStack(null).commit();
         }
 
-        private String testTesseract(Bitmap bitmap) {
+        private String processTesseract(Bitmap bitmap) {
             TessBaseAPI baseApi = new TessBaseAPI();
             baseApi.init(DATA_PATH, tesseractLanguage);
             baseApi.setImage(bitmap);
             String recognizedText = baseApi.getUTF8Text();
             baseApi.end();
-            recognizedText.replace("-\n", "").replace("\n", "");
+            recognizedText = recognizedText.replace("-\n", "").replace("\n", "");
             Log.v(TAG, recognizedText);
             return recognizedText;
         }

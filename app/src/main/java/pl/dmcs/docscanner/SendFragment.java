@@ -34,6 +34,7 @@ public class SendFragment extends Fragment {
     private TextView bluetoothText;
     private ImageButton mailButton;
     private TextView mailText;
+    private TextView restartText;
 
     public SendFragment() {}
 
@@ -47,10 +48,11 @@ public class SendFragment extends Fragment {
         this.filePath = bundle.getString("filePath");
         Log.v(TAG, filePath);
 
-        this.bluetoothButton = (ImageButton) view.findViewById(R.id.bluetoothshareIcon);
-        this.bluetoothText = (TextView) view.findViewById(R.id.bluetoothshareButton);
+//        this.bluetoothButton = (ImageButton) view.findViewById(R.id.bluetoothshareIcon);
+//        this.bluetoothText = (TextView) view.findViewById(R.id.bluetoothshareButton);
         this.mailButton = (ImageButton) view.findViewById(R.id.mailshareIcon);
         this.mailText = (TextView) view.findViewById(R.id.mailshareButton);
+        this.restartText = (TextView) view.findViewById(R.id.restartText);
 
         this.setListeners();
 
@@ -76,30 +78,30 @@ public class SendFragment extends Fragment {
         View.OnClickListener bluetoothListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-                if (btAdapter != null) {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_SEND);
-                    intent.setType("application/pdf");
-                    intent.putExtra(Intent.EXTRA_STREAM, uri );
-
-                    PackageManager packageManager = getActivity().getPackageManager();
-                    List<ResolveInfo> appsList = packageManager.queryIntentActivities(intent, 0);
-                    if(appsList.size() > 0) {
-                        String packageName = null;
-                        String className = null;
-                        boolean found = false;
-
-                        for(ResolveInfo info: appsList){
-                            packageName = info.activityInfo.packageName;
-                            if( packageName.equals("com.android.bluetooth")){
-                                className = info.activityInfo.name;
-                            }
-                        }
-                        intent.setClassName(packageName, className);
-                        startActivity(intent);
-                    }
-                }
+//                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+//                if (btAdapter != null) {
+//                    Intent intent = new Intent();
+//                    intent.setAction(Intent.ACTION_SEND);
+//                    intent.setType("application/pdf");
+//                    intent.putExtra(Intent.EXTRA_STREAM, uri );
+//
+//                    PackageManager packageManager = getActivity().getPackageManager();
+//                    List<ResolveInfo> appsList = packageManager.queryIntentActivities(intent, 0);
+//                    if(appsList.size() > 0) {
+//                        String packageName = null;
+//                        String className = null;
+//                        boolean found = false;
+//
+//                        for(ResolveInfo info: appsList){
+//                            packageName = info.activityInfo.packageName;
+//                            if( packageName.equals("com.android.bluetooth")){
+//                                className = info.activityInfo.name;
+//                            }
+//                        }
+//                        intent.setClassName(packageName, className);
+//                        startActivity(intent);
+//                    }
+//                }
             }
         };
 
@@ -113,7 +115,9 @@ public class SendFragment extends Fragment {
 
         this.mailText.setOnClickListener(mailListener);
         this.mailButton.setOnClickListener(mailListener);
-        this.bluetoothText.setOnClickListener(bluetoothListener);
-        this.bluetoothButton.setOnClickListener(bluetoothListener);
+//        this.bluetoothText.setOnClickListener(bluetoothListener);
+//        this.bluetoothButton.setOnClickListener(bluetoothListener);
+        this.restartText.setOnClickListener(restartListener);
+
     }
 }
