@@ -2,33 +2,22 @@ package pl.dmcs.docscanner;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.edmodo.cropper.CropImageView;
-import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.IOException;
-
-import pl.dmcs.docscanner.helpers.LanguageDialog;
 
 
 public class PhotoSelectFragment extends DialogFragment {
@@ -94,8 +83,6 @@ public class PhotoSelectFragment extends DialogFragment {
             public void onClick(View v) {
                 croppedImage = cropImageView.getCroppedImage();
                 mListener.onCroppedImageSetListener(croppedImage);
-                LanguageDialog languageDialog = new LanguageDialog();
-                languageDialog.show(getFragmentManager(), "lang");
             }
         });
 

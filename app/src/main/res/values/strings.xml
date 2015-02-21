@@ -34,6 +34,7 @@
     <string name="send_via_mail_text">Send via email</string>
     <string name="send_via_bluetooth">Send via bluetooth</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_pdf_from_image">Pdf from image</string>
+    <string name="create_pdf_from_text">Pdf from read text</string>
 
 </resources>

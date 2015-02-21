@@ -44,9 +44,9 @@ public class SendFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_send, container, false);
 
-        Bundle bundle = this.getArguments();
-        this.filePath = bundle.getString("filePath");
-        Log.v(TAG, filePath);
+//        Bundle bundle = this.getArguments();
+//        this.filePath = bundle.getString("filePath");
+//        Log.v(TAG, filePath);
 
 //        this.bluetoothButton = (ImageButton) view.findViewById(R.id.bluetoothshareIcon);
 //        this.bluetoothText = (TextView) view.findViewById(R.id.bluetoothshareButton);
@@ -60,20 +60,20 @@ public class SendFragment extends Fragment {
     }
 
     private void setListeners() {
-        File file = new File(filePath);
-        final Uri uri = Uri.fromFile(file);
+//        File file = new File(filePath);
+//        final Uri uri = Uri.fromFile(file);
 
-        View.OnClickListener mailListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("message/rfc822");
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
-                emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            }
-        };
+//        View.OnClickListener mailListener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent.setType("message/rfc822");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Test Subject");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "From My App");
+//                emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//            }
+//        };
 
         View.OnClickListener bluetoothListener = new View.OnClickListener() {
             @Override
@@ -113,8 +113,8 @@ public class SendFragment extends Fragment {
             }
         };
 
-        this.mailText.setOnClickListener(mailListener);
-        this.mailButton.setOnClickListener(mailListener);
+//        this.mailText.setOnClickListener(mailListener);
+//        this.mailButton.setOnClickListener(mailListener);
 //        this.bluetoothText.setOnClickListener(bluetoothListener);
 //        this.bluetoothButton.setOnClickListener(bluetoothListener);
         this.restartText.setOnClickListener(restartListener);

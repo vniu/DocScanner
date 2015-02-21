@@ -49,7 +49,6 @@ public class EditFragment extends Fragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                PDFWriter.createFile(editText);
                 SaveFragment saveFragment = new SaveFragment();
                 Bundle args = new Bundle();
                 args.putString("text", editText.getText().toString());

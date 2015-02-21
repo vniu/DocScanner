@@ -34,8 +34,9 @@ public class MainActivity extends Activity
     private static final String TAG = "MainActivity";
 
 	public String mCurrentPhotoPath;
-    private String tesseractLanguage;
     public Bitmap croppedImage;
+
+    private String tesseractLanguage;
     private String fileName;
 
     private ProgressDialog progressDialog;
@@ -61,14 +62,11 @@ public class MainActivity extends Activity
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
 
             args.putString(PhotoSelectFragment.PASS_PATH, mCurrentPhotoPath);
-//            Log.v(TAG, mCurrentPhotoPath);
 
         } else if (requestCode == FILE_REQUEST && resultCode == RESULT_OK) {
 
-//            Log.v(TAG, "file request: " + FILE_REQUEST);
             Uri selectedImageUri = data.getData();
             args.putString(PhotoSelectFragment.PASS_URI, selectedImageUri.toString());
-//            Log.v(TAG, selectedImageUri.toString());
 
         }
 
@@ -91,6 +89,9 @@ public class MainActivity extends Activity
     @Override
     public void onCroppedImageSetListener(Bitmap image) {
         this.croppedImage = image;
+
+        ChoiceFragment choiceFragment = new ChoiceFragment();
+        getFragmentManager().beginTransaction().replace(R.id.container, choiceFragment).addToBackStack(null).commit();
     }
 
     @Override
@@ -98,23 +99,7 @@ public class MainActivity extends Activity
         Log.v(TAG, "onFilenameType");
 
         this.fileName = name;
-
-        File file;
-        try {
-            file = PDFWriter.createFile(text, name + ".pdf");
-
-            SendFragment sendFragment = new SendFragment();
-            Bundle args = new Bundle();
-            Log.v(TAG, file.getAbsolutePath());
-            args.putString("filePath", file.toURI().toString());
-            sendFragment.setArguments(args);
-
-            getFragmentManager().beginTransaction().replace(R.id.container, sendFragment).addToBackStack(null).commit();
-        } catch (IOException e) {
-            Log.v(TAG, "Cannot write text to file");
-            e.printStackTrace();
-        }
-
+        new PDFWriterTask().execute(text);
     }
 
     private class TesseractTask extends AsyncTask<Bitmap, Void, String> {
@@ -130,11 +115,7 @@ public class MainActivity extends Activity
 
         @Override
         protected String doInBackground(Bitmap... params) {
-            String result = null;
-//            for (int i = 0; i < params.length; i++) {
-                result = processTesseract(params[0]);
-//            }
-            return result;
+            return processTesseract(params[0]);
         }
 
         @Override
@@ -152,11 +133,47 @@ public class MainActivity extends Activity
             TessBaseAPI baseApi = new TessBaseAPI();
             baseApi.init(DATA_PATH, tesseractLanguage);
             baseApi.setImage(bitmap);
+
             String recognizedText = baseApi.getUTF8Text();
             baseApi.end();
-            recognizedText = recognizedText.replace("-\n", "").replace("\n", "");
+
+            recognizedText = recognizedText.replace("-\n", " ").replace("\n", " ");
             Log.v(TAG, recognizedText);
             return recognizedText;
+        }
+    }
+
+    private class PDFWriterTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(context, "", "Generating PDF...", false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            File file;
+            try {
+                file = PDFWriter.createFile(params[0], fileName + ".pdf");
+
+                return file.toURI().toString();
+            } catch (IOException e) {
+                Log.v(TAG, "Cannot write text to file");
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String filePath) {
+            progressDialog.dismiss();
+
+            SendFragment sendFragment = new SendFragment();
+            Bundle args = new Bundle();
+            args.putString("filePath", filePath);
+            sendFragment.setArguments(args);
+
+            getFragmentManager().beginTransaction().replace(R.id.container, sendFragment).addToBackStack(null).commit();
         }
     }
 
